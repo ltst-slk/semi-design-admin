@@ -19,8 +19,18 @@ The best practices for React Hooks + Vite + Semi + Zustand + Typescript🚀.
 
 
 ## ⚡preview
-
-developing...
+## login
+![登录图片](https://github.com/ltst-slk/project-note/blob/main/login.png)
+## workbench
+![工作台](https://github.com/ltst-slk/project-note/blob/main/workbench.png)
+## analysis
+![分析页](https://github.com/ltst-slk/project-note/blob/main/analysis.png)
+## searchList
+![查询列表](https://github.com/ltst-slk/project-note/blob/main/searchList.png)
+## basicForm
+![基础表单](https://github.com/ltst-slk/project-note/blob/main/basicForm.png)
+## basicDetail
+![基础详情页](https://github.com/ltst-slk/project-note/blob/main/basicDetail.png)
 
 ## 📦 Install
 

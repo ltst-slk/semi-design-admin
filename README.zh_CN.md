@@ -19,7 +19,19 @@ React Hooks + Vite + Semi + Zustand + Typescript 最佳实践🚀.
 
 ## ⚡preview
 
-开发中...
+## 登录
+![登录图片](https://github.com/ltst-slk/project-note/blob/main/login.png)
+## 工作台
+![工作台](https://github.com/ltst-slk/project-note/blob/main/workbench.png)
+## 分析页
+![分析页](https://github.com/ltst-slk/project-note/blob/main/analysis.png)
+## 查询列表
+![查询列表](https://github.com/ltst-slk/project-note/blob/main/searchList.png)
+## 基础表单
+![基础表单](https://github.com/ltst-slk/project-note/blob/main/basicForm.png)
+## 基础详情页
+![基础详情页](https://github.com/ltst-slk/project-note/blob/main/basicDetail.png)
+
 
 ## 📦 使用
 
