@@ -1,7 +1,8 @@
 import React from 'react'
 import { Carousel, Typography, Space, Form, Toast, Button } from '@douyinfe/semi-ui'
-
+import userStore from '@src/store/common/user'
 import './login.scss'
+import { useNavigate } from 'react-router-dom'
 
 const { Title, Paragraph } = Typography
 
@@ -41,12 +42,20 @@ const textList = [
 	['Semi 物料市场', '面向业务场景的定制化组件，支持线上预览和调试', '内容由 Semi Design 用户共建'],
 	['Semi 设计/代码模板', '高效的 Design2Code 设计稿转代码', '海量 Figma 设计模板一键转为真实前端代码']
 ]
-const handleSubmit = (values) => {
-	console.log(values)
-	Toast.info('表单已提交')
-}
 
 const Index: React.FC = () => {
+	const navigate = useNavigate()
+	const handleSubmit = (values: { userName: string; password: string }) => {
+		const { userName } = values
+		const token = '1234567AAAAA'
+		const role = 'admin'
+		const userInfo = { username: userName, token, role }
+		userStore.setState({ username: userInfo.username })
+		userStore.setState({ token: userInfo.token })
+		userStore.setState({ role: userInfo.role })
+		console.log('userStore', userStore.getState())
+		navigate('/dashboard/workbeach')
+	}
 	return (
 		<div className="container">
 			<div className="banner">

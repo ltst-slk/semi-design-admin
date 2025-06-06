@@ -1,6 +1,6 @@
 import React, { lazy, FC } from 'react'
 import { RouteObject } from 'react-router'
-import { useRoutes } from 'react-router-dom'
+import { Navigate, useRoutes } from 'react-router-dom'
 import { WrapperRouteComponent, WrapperRouteWithOutLayoutComponent } from './config'
 import LoginPage from '@pages/login'
 import LayoutPage from '@pages/layout'
@@ -35,6 +35,10 @@ const routeList: RouteObject[] = [
 		path: '/',
 		element: <WrapperRouteComponent element={<LayoutPage />} titleId="" auth />,
 		children: [
+			{
+				index: true, // 表示当访问 '/' 时匹配这个路由
+				element: <Navigate to="/login" replace />
+			},
 			{
 				path: 'dashboard/workbeach',
 				element: <WrapperRouteComponent element={<DashboardWorkbeach />} titleId="工作台" auth />

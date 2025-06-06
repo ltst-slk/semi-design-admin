@@ -18,6 +18,7 @@ const useStore = create<workBeachState>((set, get) => ({
 			url: `/workbeach`,
 			method: 'get'
 		})
+		console.log('/workbeach', res)
 		const { headerData, inProcessData, recentActivityData } = res.data
 		set({
 			headerData,

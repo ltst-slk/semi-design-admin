@@ -104,7 +104,7 @@ const Index: React.FC = () => {
 												</div>
 											}
 										>
-											{v.description}
+											<Text>{v.description}</Text>
 										</Card>
 									))}
 								</CardGroup>
