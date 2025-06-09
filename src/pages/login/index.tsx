@@ -47,8 +47,13 @@ const textList = [
 const Index: React.FC = () => {
 	const navigate = useNavigate()
 	const fetchUserInfo = userStore((state) => state.fetchUserInfo)
-	// const usernameAll = userStore((state) => state.username)
-
+	const userToken = userStore((state) => state.token)
+	useEffect(() => {
+		console.log('userToken', userToken)
+		if (userToken) {
+			navigate('/dashboard/workbeach')
+		}
+	}, [userToken])
 	const handleSubmit = async (values: { userName: string; password: string; acceptedTerms: boolean }) => {
 		console.log('values', values)
 		const loginParam = {
@@ -66,15 +71,12 @@ const Index: React.FC = () => {
 		}
 		// 登录成功
 		const { token, nickname } = data
-		// console.log('before',usernameAll);
 
 		await fetchUserInfo()
 		Notification.success({ title: nickname, content: msg, position: 'top', duration: 3 })
-
-		// console.log('after',usernameAll);
 		console.log('after', userStore.getState().username)
 		// 跳转工作台
-		// navigate('/dashboard/workbeach')
+		navigate('/dashboard/workbeach')
 		// const { userName } = values
 		// const token = '1234567AAAAA'
 		// const role = 'admin'
