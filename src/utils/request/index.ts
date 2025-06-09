@@ -50,7 +50,11 @@ axios.interceptors.response.use(
 		return Promise.reject(networkErrorMsg)
 	}
 )
-
+export type Response = {
+	code?: number
+	msg?: string
+	data?: any
+}
 // request
 export default async function request(options: requestOptions) {
 	const { url } = options

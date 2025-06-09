@@ -1,18 +1,41 @@
 import { MockMethod } from 'vite-plugin-mock'
+import { LoginParam } from '../src/api/user/login'
 export default [
+	{
+		url: '/api/userinfo',
+		method: 'get',
+		timeout: '300',
+		response: {
+			code: 200,
+			msg: '用户信息获取成功',
+			data: {
+				username: 'admin',
+				nickname: '管理员',
+				tenantName: '加一科技有限公司',
+				token: 'ABCDEFG',
+				role: 'admin'
+			}
+		}
+	},
 	{
 		url: '/api/login',
 		method: 'post',
-		timeout: 1000,
-		response: (payload: { username: string; password: string; role: string }) => {
-			const { username, password } = payload
+		timeout: 200,
+		response: (body: LoginParam) => {
+			const { username, password, acceptedTerms, loginType } = body
+			// return {
+			//   code: 5001,
+			//   msg: '用户名或密码错误',
+			//   data: null,
+			// }
 			return {
 				code: 200,
+				msg: '欢迎进入Semi-design-admin',
 				data: {
-					username: 'admin',
-					password: 'admin',
+					username: username,
+					nickname: '管理员',
 					role: 'admin',
-					token: 'ASFSjskfhjsshjfhsajkfheuisbjsfjasfs'
+					token: 'ABCDEFG'
 				}
 			}
 		}
@@ -20,11 +43,11 @@ export default [
 	{
 		url: '/api/logout',
 		method: 'post',
-		timeout: 1000,
+		timeout: 200,
 		response: {
 			code: 200,
 			data: {
-				username: 'xieyezi'
+				username: 'admin'
 			}
 		}
 	}

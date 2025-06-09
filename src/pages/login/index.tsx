@@ -1,8 +1,9 @@
-import React from 'react'
-import { Carousel, Typography, Space, Form, Toast, Button } from '@douyinfe/semi-ui'
+import React, { useEffect } from 'react'
+import { Carousel, Typography, Space, Form, Toast, Button, Notification } from '@douyinfe/semi-ui'
 import userStore from '@src/store/common/user'
 import './login.scss'
 import { useNavigate } from 'react-router-dom'
+import { login } from '@src/api/user/login'
 
 const { Title, Paragraph } = Typography
 
@@ -45,16 +46,43 @@ const textList = [
 
 const Index: React.FC = () => {
 	const navigate = useNavigate()
-	const handleSubmit = (values: { userName: string; password: string }) => {
-		const { userName } = values
-		const token = '1234567AAAAA'
-		const role = 'admin'
-		const userInfo = { username: userName, token, role }
-		userStore.setState({ username: userInfo.username })
-		userStore.setState({ token: userInfo.token })
-		userStore.setState({ role: userInfo.role })
-		console.log('userStore', userStore.getState())
-		navigate('/dashboard/workbeach')
+	const fetchUserInfo = userStore((state) => state.fetchUserInfo)
+	// const usernameAll = userStore((state) => state.username)
+
+	const handleSubmit = async (values: { userName: string; password: string; acceptedTerms: boolean }) => {
+		console.log('values', values)
+		const loginParam = {
+			username: values.userName,
+			password: values.password,
+			acceptedTerms: values.acceptedTerms
+		}
+		console.log('loginParam', loginParam)
+		const res = await login(loginParam)
+		// 登录失败
+		const { code, msg, data } = res
+		if (code !== 200) {
+			Notification.error({ content: msg, position: 'top', duration: 3 })
+			return
+		}
+		// 登录成功
+		const { token, nickname } = data
+		// console.log('before',usernameAll);
+
+		await fetchUserInfo()
+		Notification.success({ title: nickname, content: msg, position: 'top', duration: 3 })
+
+		// console.log('after',usernameAll);
+		console.log('after', userStore.getState().username)
+		// 跳转工作台
+		// navigate('/dashboard/workbeach')
+		// const { userName } = values
+		// const token = '1234567AAAAA'
+		// const role = 'admin'
+		// const userInfo = { username: userName, token, role }
+		// userStore.setState({ username: userInfo.username })
+		// userStore.setState({ token: userInfo.token })
+		// userStore.setState({ role: userInfo.role })
+		// console.log('userStore', userStore.getState())
 	}
 	return (
 		<div className="container">
@@ -102,7 +130,7 @@ const Index: React.FC = () => {
 								placeholder="请输入用户名"
 							></Form.Input>
 							<Form.Input field="password" label="密码" style={{ width: '100%' }} placeholder="请输入密码"></Form.Input>
-							<Form.Checkbox field="agree" noLabel>
+							<Form.Checkbox field="acceptedTerms" noLabel>
 								我同意用户服务协议
 							</Form.Checkbox>
 							<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -115,7 +143,7 @@ const Index: React.FC = () => {
 										注册
 									</Button>
 								</p>
-								<Button disabled={!values.agree} htmlType="submit" type="tertiary">
+								<Button disabled={!values.acceptedTerms} htmlType="submit" type="tertiary">
 									登录
 								</Button>
 							</div>
