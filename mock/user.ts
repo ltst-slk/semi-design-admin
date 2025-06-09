@@ -13,6 +13,7 @@ export default [
 				nickname: '管理员',
 				tenantName: '加一科技有限公司',
 				token: 'ABCDEFG',
+				refreshToken: 'refreshTokenABCDEFG',
 				role: 'admin'
 			}
 		}
@@ -35,7 +36,8 @@ export default [
 					username: username,
 					nickname: '管理员',
 					role: 'admin',
-					token: 'ABCDEFG'
+					token: 'ABCDEFG',
+					refreshToken: 'refreshTokenABCDE'
 				}
 			}
 		}

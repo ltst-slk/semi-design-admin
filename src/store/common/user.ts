@@ -19,6 +19,7 @@ const userStore = create<UserState>()(
 			nickname: '',
 			tenantName: '',
 			token: '',
+			refreshToken: '',
 			role: '',
 			fetchUserInfo: async () => {
 				const res = await request({
